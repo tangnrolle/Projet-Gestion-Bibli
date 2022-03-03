@@ -16,12 +16,12 @@ import com.ensta.librarymanager.modele.Abonnement;
 public class MembreDaoImpl implements MembreDao {
     private static MembreDaoImpl instance;
     private Connection connection;
-    private String idQuery = "SELECT id, nom, prenom, adresse, email, telephone, abonnement FROM membre WHERE id = ?";
+    private String idQuery = "SELECT id, nom, prenom, adresse, email, telephone, abonnement FROM membre WHERE id = ?;";
     private String listQuery = "SELECT id, nom, prenom, adresse, email, telephone, abonnement FROM membre ORDER BY nom, prenom;";
-    private String createQuery = "INSERT INTO membre(nom, prenom, adresse, email, telephone, abonnement) VALUES (?, ?, ?, ?, ?, ?)";
+    private String createQuery = "INSERT INTO membre(nom, prenom, adresse, email, telephone, abonnement) VALUES (?, ?, ?, ?, ?, ?);";
     private String updateQuery = "UPDATE membre SET nom=?,prenom=?,adresse=?,email=?,telephone=?,abonnement=? WHERE id=?;";
     private String deleteQuery = "DELETE FROM membre WHERE id = ?;";
-    private String countQuery = "SELECT COUNT(id) AS count FROM membre";
+    private String countQuery = "SELECT COUNT(id) AS count FROM membre;";
 
     private MembreDaoImpl() throws SQLException {
         setConnection(ConnectionManager.getConnection());

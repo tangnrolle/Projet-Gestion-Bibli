@@ -6,7 +6,11 @@ public class Livre {
     private String auteur;
     private String isbn;
 
-    Livre() {
+    public Livre(int id, String titre, String auteur, String isbn) {
+        this.id = id;
+        this.titre = titre;
+        this.auteur = auteur;
+        this.isbn = isbn;
     }
 
     public String getIsbn() {

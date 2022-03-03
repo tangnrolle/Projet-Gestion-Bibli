@@ -17,7 +17,7 @@ public interface EmpruntDao {
 
 	public Emprunt getById(int id) throws DaoException;
 
-	public void create(int idMembre, int idLivre, LocalDate dateEmprunt) throws DaoException;
+	public int create(int idMembre, int idLivre, LocalDate dateEmprunt) throws DaoException;
 
 	public void update(Emprunt emprunt) throws DaoException;
 
