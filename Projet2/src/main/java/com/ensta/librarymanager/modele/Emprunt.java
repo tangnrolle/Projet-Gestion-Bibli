@@ -5,15 +5,15 @@ import java.time.LocalDate;
 public class Emprunt {
 
     private int id;
-    private int idMembre;
-    private int idLivre;
+    private Membre membre;
+    private Livre livre;
     private LocalDate dateEmprunt;
     private LocalDate dateRetour;
 
-    public Emprunt(int id, int idMembre, int idLivre, LocalDate dateEmprunt, LocalDate dateRetour) {
+    public Emprunt(int id, Membre membre, Livre livre, LocalDate dateEmprunt, LocalDate dateRetour) {
         this.setId(id);
-        this.setIdMembre(idMembre);
-        this.setIdLivre(idLivre);
+        this.setMembre(membre);
+        this.setLivre(livre);
         this.setDateEmprunt(dateEmprunt);
         this.setDateRetour(dateRetour);
     }
@@ -34,12 +34,20 @@ public class Emprunt {
         this.dateEmprunt = dateEmprunt;
     }
 
-    public int getIdLivre() {
-        return idLivre;
+    public Livre getLivre() {
+        return livre;
     }
 
-    public void setIdLivre(int idLivre) {
-        this.idLivre = idLivre;
+    public void setLivre(Livre livre) {
+        this.livre = livre;
+    }
+
+    public Membre getMembre() {
+        return membre;
+    }
+
+    public void setMembre(Membre membre) {
+        this.membre = membre;
     }
 
     public int getId() {
@@ -50,17 +58,14 @@ public class Emprunt {
         this.id = id;
     }
 
-    public int getIdMembre() {
-        return idMembre;
-    }
-
-    public void setIdMembre(int idMembre) {
-        this.idMembre = idMembre;
-    }
-
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+        String desc = new String();
+        desc += "(" + id + "," + membre.getNom() + "," + livre.getTitre() + "," + dateEmprunt + ","
+                + (dateRetour == null
+                        ? "non retourné"
+                        : dateRetour)
+                + ")\n";
+        return desc;
     }
 }

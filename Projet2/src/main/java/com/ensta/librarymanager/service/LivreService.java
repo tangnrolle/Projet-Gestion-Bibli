@@ -13,7 +13,7 @@ public interface LivreService {
 
 	public Livre getById(int id) throws ServiceException;
 
-	public int create(String titre, String auteur, String isbn) throws ServiceException;
+	public int create(Livre livre) throws ServiceException;
 
 	public void update(Livre livre) throws ServiceException;
 

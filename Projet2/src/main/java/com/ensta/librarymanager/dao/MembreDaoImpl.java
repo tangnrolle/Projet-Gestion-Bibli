@@ -23,9 +23,8 @@ public class MembreDaoImpl implements MembreDao {
     private String deleteQuery = "DELETE FROM membre WHERE id = ?;";
     private String countQuery = "SELECT COUNT(id) AS count FROM membre;";
 
-    private MembreDaoImpl() throws SQLException {
-        setConnection(ConnectionManager.getConnection());
-    }
+    private MembreDaoImpl() {
+    };
 
     public Connection getConnection() {
         return connection;
@@ -35,7 +34,7 @@ public class MembreDaoImpl implements MembreDao {
         this.connection = connection;
     }
 
-    public static MembreDaoImpl getInstance() throws SQLException {
+    public static MembreDaoImpl getInstance() {
         if (instance == null) {
             instance = new MembreDaoImpl();
         }
@@ -58,6 +57,7 @@ public class MembreDaoImpl implements MembreDao {
                         Abonnement.valueOf(rs.getString("abonnement").toUpperCase())));
             }
 
+            conn.close();
             return output;
 
         } catch (SQLException e) {
@@ -82,6 +82,7 @@ public class MembreDaoImpl implements MembreDao {
                         rs.getString("adresse"), rs.getString("email"), rs.getString("telephone"),
                         Abonnement.valueOf(rs.getString("abonnement").toUpperCase()));
 
+                conn.close();
                 return output;
             }
 
@@ -94,26 +95,26 @@ public class MembreDaoImpl implements MembreDao {
     }
 
     @Override
-    public int create(String nom, String prenom, String adresse, String email, String telephone, Abonnement abonnement)
-            throws DaoException {
+    public int create(Membre membre) throws DaoException {
         try {
             Connection conn = ConnectionManager.getConnection();
 
             PreparedStatement pstmnt = conn.prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS);
 
-            pstmnt.setString(1, nom);
-            pstmnt.setString(2, prenom);
-            pstmnt.setString(3, adresse);
-            pstmnt.setString(4, email);
-            pstmnt.setString(5, telephone);
-            pstmnt.setString(6, abonnement.toString());
+            pstmnt.setString(1, membre.getNom());
+            pstmnt.setString(2, membre.getPrenom());
+            pstmnt.setString(3, membre.getAdresse());
+            pstmnt.setString(4, membre.getEmail());
+            pstmnt.setString(5, membre.getTelephone());
+            pstmnt.setString(6, membre.getAbonnement().toString());
 
-            pstmnt.executeQuery();
+            pstmnt.executeUpdate();
             ResultSet rs = pstmnt.getGeneratedKeys();
 
             if (rs.next()) {
                 int id = rs.getInt(1);
                 System.out.println("Membre créé avec succès");
+                conn.close();
                 return id;
             }
 
@@ -141,6 +142,7 @@ public class MembreDaoImpl implements MembreDao {
 
             pstmnt.executeUpdate();
             System.out.println("Membre mis à jour avec succès");
+            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -158,6 +160,7 @@ public class MembreDaoImpl implements MembreDao {
 
             pstmnt.executeUpdate();
             System.out.println("Membre supprimé avec succès");
+            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -174,7 +177,9 @@ public class MembreDaoImpl implements MembreDao {
             ResultSet rs = stmnt.executeQuery(countQuery);
 
             if (rs.next()) {
-                return rs.getInt("count");
+                int count = rs.getInt("count");
+                conn.close();
+                return count;
             }
         } catch (SQLException e) {
             e.printStackTrace();
