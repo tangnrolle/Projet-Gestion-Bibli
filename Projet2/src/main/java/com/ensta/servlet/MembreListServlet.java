@@ -9,23 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ensta.librarymanager.exception.ServiceException;
-import com.ensta.librarymanager.service.EmpruntServiceImpl;
+import com.ensta.librarymanager.service.MembreServiceImpl;
 
-@WebServlet("/emprunt_return")
-public class EmpruntReturnServlet extends HttpServlet {
-    EmpruntServiceImpl empruntServiceImpl = EmpruntServiceImpl.getInstance();
+@WebServlet("/membre_list")
+public class MembreListServlet extends HttpServlet {
+    MembreServiceImpl membreServiceImpl = MembreServiceImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            request.setAttribute("listEmpruntNonRendus", this.empruntServiceImpl.getListCurrent());
+            request.setAttribute("listMembre", this.membreServiceImpl.getList());
 
         } catch (ServiceException e) {
             e.printStackTrace();
-            throw new ServletException("Erreur au niveau du servlet - EmpruntReturnServlet.doGet");
+            throw new ServletException("Erreur au niveau du servlet - MembreListServlet.doGet");
         }
-        this.getServletContext().getRequestDispatcher("/WEB-INF/View/emprunt_return.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/View/membre_list.jsp").forward(request, response);
     }
 
     @Override

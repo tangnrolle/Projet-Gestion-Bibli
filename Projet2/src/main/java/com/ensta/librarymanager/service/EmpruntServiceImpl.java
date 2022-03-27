@@ -165,9 +165,9 @@ public class EmpruntServiceImpl implements EmpruntService {
         try {
             EmpruntDaoImpl empruntDaoImpl = EmpruntDaoImpl.getInstance();
 
-            Emprunt dispo = empruntDaoImpl.getListCurrentByLivre(idLivre).get(0);
+            List<Emprunt> dispo = empruntDaoImpl.getListCurrentByLivre(idLivre);
 
-            if (dispo == null || dispo.getDateRetour() == null)
+            if (dispo.size() == 0 || dispo == null)
                 return true;
 
             else
@@ -187,8 +187,9 @@ public class EmpruntServiceImpl implements EmpruntService {
             int quota = membre.getAbonnement().getquota();
             int nb_emprunts = empruntDaoImpl.getListCurrentByMembre(membre.getId()).size();
 
-            if (nb_emprunts < quota)
+            if (nb_emprunts < quota) {
                 return true;
+            }
 
             else
                 return false;

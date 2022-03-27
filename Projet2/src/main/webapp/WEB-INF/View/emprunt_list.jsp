@@ -4,6 +4,7 @@
 
   <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
     <title>Library Management</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
@@ -42,11 +43,12 @@
                       <td>${emprunt.getDateEmprunt()}</td>
                       <td>
                         <c:choose>
-                          <c:when test="${emprunt.getDateRetour() == NULL}">
-                            emprunte
+                          <c:when test="${emprunt.getDateRetour() != NULL}">
+                            ${emprunt.getDateRetour()}
                           </c:when>
                           <c:otherwise>
-                            <a href="emprunt_return?id=idDeLEmprunt">
+                            <a href="emprunt_return?idDeLEmprunt">
+                              retourner
                               <ion-icon class="table-item" name="log-in">
                             </a>
                           </c:otherwise>

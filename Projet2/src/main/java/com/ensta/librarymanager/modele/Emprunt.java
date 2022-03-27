@@ -63,7 +63,7 @@ public class Emprunt {
         String desc = new String();
         desc += "(" + id + "," + membre.getNom() + "," + livre.getTitre() + "," + dateEmprunt + ","
                 + (dateRetour == null
-                        ? "non retourné"
+                        ? "emprunté"
                         : dateRetour)
                 + ")\n";
         return desc;

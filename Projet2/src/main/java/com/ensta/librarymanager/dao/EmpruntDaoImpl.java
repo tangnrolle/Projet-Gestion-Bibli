@@ -120,8 +120,10 @@ public class EmpruntDaoImpl implements EmpruntDao {
         try {
             Connection conn = ConnectionManager.getConnection();
 
-            Statement stmnt = conn.createStatement();
-            ResultSet rs = stmnt.executeQuery(listCurrentByMembreQuery);
+            PreparedStatement pstmnt = conn.prepareStatement(listCurrentByMembreQuery);
+            pstmnt.setInt(1, idMembre);
+
+            ResultSet rs = pstmnt.executeQuery();
 
             List<Emprunt> output = new ArrayList<Emprunt>();
 
@@ -150,8 +152,10 @@ public class EmpruntDaoImpl implements EmpruntDao {
         try {
             Connection conn = ConnectionManager.getConnection();
 
-            Statement stmnt = conn.createStatement();
-            ResultSet rs = stmnt.executeQuery(listCurrentByLivreQuery);
+            PreparedStatement pstmnt = conn.prepareStatement(listCurrentByLivreQuery);
+            pstmnt.setInt(1, idLivre);
+
+            ResultSet rs = pstmnt.executeQuery();
 
             List<Emprunt> output = new ArrayList<Emprunt>();
 

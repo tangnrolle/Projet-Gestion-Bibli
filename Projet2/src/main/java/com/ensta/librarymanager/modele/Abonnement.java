@@ -3,7 +3,7 @@ package com.ensta.librarymanager.modele;
 import java.util.NoSuchElementException;
 
 public enum Abonnement {
-    BASIC(1), PREMIUM(3), VIP(5);
+    BASIC(2), PREMIUM(4), VIP(6);
 
     /*
      * ***

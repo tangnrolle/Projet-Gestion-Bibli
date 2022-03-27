@@ -26,4 +26,5 @@ public interface EmpruntService {
 	public boolean isLivreDispo(int idLivre) throws ServiceException;
 
 	public boolean isEmpruntPossible(Membre membre) throws ServiceException;
+
 }

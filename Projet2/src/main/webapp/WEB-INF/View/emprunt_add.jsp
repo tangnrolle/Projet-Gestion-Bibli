@@ -31,7 +31,7 @@
                   <div class="input-field col s6">
                     <select id="idLivre" name="idLivre" class="browser-default">
                       <option value="" disabled selected>-- Livres --</option>
-                      <c:forEach items="${listLivre}" var="livre">
+                      <c:forEach items="${listLivreDispo}" var="livre">
                         <option value="idLivre">"${livre.getTitre()}", de ${livre.getAuteur()}</option>
                       </c:forEach>
                       <!-- TODO : parcourir la liste des livres disponibles et afficher autant d'options que n�cessaire, sur la base de l'exemple ci-dessous -->
@@ -40,8 +40,9 @@
                   <div class="input-field col s6">
                     <select id="idMembre" name="idMembre" class="browser-default">
                       <option value="" disabled selected>-- Membres --</option>
-                      <!-- TODO : parcourir la liste des membres pouvant emprunter et afficher autant d'options que n�cessaire, sur la base de l'exemple ci-dessous -->
-                      <option value="idDuMembre">Prenom et nom du membre</option>
+                      <c:forEach items="${listMembreEmpruntPossible}" var="membre">
+                        <option value="idMembre">${membre.getPrenom()} ${membre.getNom()}</option>
+                      </c:forEach>
                     </select>
                   </div>
                 </div>

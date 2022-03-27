@@ -23,14 +23,14 @@ public class EmpruntAddServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            request.setAttribute("listLivre", this.livreServiceImpl.getList());
-            request.setAttribute("listeMembre", this.membreServiceImpl.getList());
+            request.setAttribute("listLivreDispo", this.livreServiceImpl.getListDispo());
+            request.setAttribute("listMembreEmpruntPossible", this.membreServiceImpl.getListMembreEmpruntPossible());
 
         } catch (ServiceException e) {
             e.printStackTrace();
-            throw new ServletException("Erreur au niveau du servlet - EmpruntListServlet.doGet");
+            throw new ServletException("Erreur au niveau du servlet - EmpruntAddServlet.doGet");
         }
-        this.getServletContext().getRequestDispatcher("/WEB-INF/View/emprunt_list.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/View/emprunt_add.jsp").forward(request, response);
     }
 
     @Override
