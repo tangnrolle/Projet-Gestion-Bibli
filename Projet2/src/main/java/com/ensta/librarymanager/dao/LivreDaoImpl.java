@@ -55,6 +55,7 @@ public class LivreDaoImpl implements LivreDao {
                         rs.getString("isbn")));
             }
 
+            conn.close();
             return output;
 
         } catch (SQLException e) {
@@ -78,6 +79,7 @@ public class LivreDaoImpl implements LivreDao {
                 Livre output = new Livre(rs.getInt("id"), rs.getString("titre"), rs.getString("auteur"),
                         rs.getString("isbn"));
 
+                conn.close();
                 return output;
             }
 
@@ -90,22 +92,23 @@ public class LivreDaoImpl implements LivreDao {
     }
 
     @Override
-    public int create(String titre, String auteur, String isbn) throws DaoException {
+    public int create(Livre livre) throws DaoException {
         try {
             Connection conn = ConnectionManager.getConnection();
 
             PreparedStatement pstmnt = conn.prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS);
 
-            pstmnt.setString(1, titre);
-            pstmnt.setString(2, auteur);
-            pstmnt.setString(3, isbn);
+            pstmnt.setString(1, livre.getTitre());
+            pstmnt.setString(2, livre.getAuteur());
+            pstmnt.setString(3, livre.getIsbn());
 
-            pstmnt.executeQuery();
+            pstmnt.executeUpdate();
             ResultSet rs = pstmnt.getGeneratedKeys();
 
             if (rs.next()) {
                 int id = rs.getInt(1);
                 System.out.println("Livre créé avec succès");
+                conn.close();
                 return id;
             }
 
@@ -130,6 +133,7 @@ public class LivreDaoImpl implements LivreDao {
 
             pstmnt.executeUpdate();
             System.out.println("Livre mis à jour avec succès");
+            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -148,6 +152,7 @@ public class LivreDaoImpl implements LivreDao {
 
             pstmnt.executeUpdate();
             System.out.println("Livre supprimé avec succès");
+            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -165,7 +170,10 @@ public class LivreDaoImpl implements LivreDao {
             ResultSet rs = stmnt.executeQuery(countQuery);
 
             if (rs.next()) {
-                return rs.getInt("count");
+                int count = rs.getInt("count");
+                conn.close();
+                return count;
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

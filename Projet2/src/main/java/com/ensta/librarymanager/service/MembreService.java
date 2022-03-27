@@ -13,8 +13,7 @@ public interface MembreService {
 
 	public Membre getById(int id) throws ServiceException;
 
-	public int create(String nom, String prenom, String adresse, String email, String telephone)
-			throws ServiceException;
+	public int create(Membre membre) throws ServiceException;
 
 	public void update(Membre membre) throws ServiceException;
 

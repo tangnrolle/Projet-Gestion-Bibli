@@ -1,6 +1,5 @@
 package com.ensta.librarymanager.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import com.ensta.librarymanager.exception.ServiceException;
@@ -18,9 +17,9 @@ public interface EmpruntService {
 
 	public Emprunt getById(int id) throws ServiceException;
 
-	public void create(int idMembre, int idLivre, LocalDate dateEmprunt) throws ServiceException;
+	public void create(Emprunt emprunt) throws ServiceException;
 
-	public void returnBook(int id) throws ServiceException;
+	public void returnBook(int idLivre) throws ServiceException;
 
 	public int count() throws ServiceException;
 

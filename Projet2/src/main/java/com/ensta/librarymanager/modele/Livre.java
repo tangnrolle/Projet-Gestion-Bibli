@@ -47,7 +47,8 @@ public class Livre {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+        String desc = new String();
+        desc += "(" + id + "," + titre + "," + auteur + "," + isbn + ")\n";
+        return desc;
     }
 }

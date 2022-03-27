@@ -5,12 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.ensta.librarymanager.exception.DaoException;
+import com.ensta.librarymanager.modele.Abonnement;
 import com.ensta.librarymanager.modele.Emprunt;
+import com.ensta.librarymanager.modele.Livre;
+import com.ensta.librarymanager.modele.Membre;
 import com.ensta.librarymanager.persistence.ConnectionManager;
 
 public class EmpruntDaoImpl implements EmpruntDao {
@@ -64,11 +66,17 @@ public class EmpruntDaoImpl implements EmpruntDao {
             List<Emprunt> output = new ArrayList<Emprunt>();
 
             while (rs.next()) {
-                output.add(new Emprunt(rs.getInt("id"), rs.getInt("idMembre"), rs.getInt("idLivre"),
+                output.add(new Emprunt(rs.getInt("id"),
+                        new Membre(rs.getInt("idMembre"), rs.getString("nom"), rs.getString("prenom"),
+                                rs.getString("email"), rs.getString("adresse"), rs.getString("telephone"),
+                                Abonnement.valueOf(rs.getString("abonnement").toUpperCase())),
+                        new Livre(rs.getInt("idLivre"), rs.getString("titre"), rs.getString("auteur"),
+                                rs.getString("isbn")),
                         rs.getDate("dateEmprunt").toLocalDate(),
-                        rs.getDate("dateRetour").toLocalDate()));
+                        rs.getDate("dateRetour") == null ? null : rs.getDate("dateRetour").toLocalDate()));
             }
 
+            conn.close();
             return output;
 
         } catch (SQLException e) {
@@ -88,11 +96,17 @@ public class EmpruntDaoImpl implements EmpruntDao {
             List<Emprunt> output = new ArrayList<Emprunt>();
 
             while (rs.next()) {
-                output.add(new Emprunt(rs.getInt("id"), rs.getInt("idMembre"), rs.getInt("idLivre"),
+                output.add(new Emprunt(rs.getInt("id"),
+                        new Membre(rs.getInt("idMembre"), rs.getString("nom"), rs.getString("prenom"),
+                                rs.getString("email"), rs.getString("adresse"), rs.getString("telephone"),
+                                Abonnement.valueOf(rs.getString("abonnement").toUpperCase())),
+                        new Livre(rs.getInt("idLivre"), rs.getString("titre"), rs.getString("auteur"),
+                                rs.getString("isbn")),
                         rs.getDate("dateEmprunt").toLocalDate(),
-                        rs.getDate("dateRetour").toLocalDate()));
+                        rs.getDate("dateRetour") == null ? null : rs.getDate("dateRetour").toLocalDate()));
             }
 
+            conn.close();
             return output;
 
         } catch (SQLException e) {
@@ -112,11 +126,17 @@ public class EmpruntDaoImpl implements EmpruntDao {
             List<Emprunt> output = new ArrayList<Emprunt>();
 
             while (rs.next()) {
-                output.add(new Emprunt(rs.getInt("id"), rs.getInt("idMembre"), rs.getInt("idLivre"),
+                output.add(new Emprunt(rs.getInt("id"),
+                        new Membre(rs.getInt("idMembre"), rs.getString("nom"), rs.getString("prenom"),
+                                rs.getString("email"), rs.getString("adresse"), rs.getString("telephone"),
+                                Abonnement.valueOf(rs.getString("abonnement").toUpperCase())),
+                        new Livre(rs.getInt("idLivre"), rs.getString("titre"), rs.getString("auteur"),
+                                rs.getString("isbn")),
                         rs.getDate("dateEmprunt").toLocalDate(),
-                        rs.getDate("dateRetour").toLocalDate()));
+                        rs.getDate("dateRetour") == null ? null : rs.getDate("dateRetour").toLocalDate()));
             }
 
+            conn.close();
             return output;
 
         } catch (SQLException e) {
@@ -136,11 +156,17 @@ public class EmpruntDaoImpl implements EmpruntDao {
             List<Emprunt> output = new ArrayList<Emprunt>();
 
             while (rs.next()) {
-                output.add(new Emprunt(rs.getInt("id"), rs.getInt("idMembre"), rs.getInt("idLivre"),
+                output.add(new Emprunt(rs.getInt("id"),
+                        new Membre(rs.getInt("idMembre"), rs.getString("nom"), rs.getString("prenom"),
+                                rs.getString("email"), rs.getString("adresse"), rs.getString("telephone"),
+                                Abonnement.valueOf(rs.getString("abonnement").toUpperCase())),
+                        new Livre(rs.getInt("idLivre"), rs.getString("titre"), rs.getString("auteur"),
+                                rs.getString("isbn")),
                         rs.getDate("dateEmprunt").toLocalDate(),
-                        rs.getDate("dateRetour").toLocalDate()));
+                        rs.getDate("dateRetour") == null ? null : rs.getDate("dateRetour").toLocalDate()));
             }
 
+            conn.close();
             return output;
 
         } catch (SQLException e) {
@@ -161,10 +187,16 @@ public class EmpruntDaoImpl implements EmpruntDao {
 
             if (rs.next()) {
 
-                Emprunt output = new Emprunt(rs.getInt("id"), rs.getInt("idMembre"), rs.getInt("idLivre"),
+                Emprunt output = new Emprunt(rs.getInt("id"),
+                        new Membre(rs.getInt("idMembre"), rs.getString("nom"), rs.getString("prenom"),
+                                rs.getString("email"), rs.getString("adresse"), rs.getString("telephone"),
+                                Abonnement.valueOf(rs.getString("abonnement").toUpperCase())),
+                        new Livre(rs.getInt("idLivre"), rs.getString("titre"), rs.getString("auteur"),
+                                rs.getString("isbn")),
                         rs.getDate("dateEmprunt").toLocalDate(),
-                        rs.getDate("dateRetour").toLocalDate());
+                        rs.getDate("dateRetour") == null ? null : rs.getDate("dateRetour").toLocalDate());
 
+                conn.close();
                 return output;
             }
 
@@ -176,22 +208,23 @@ public class EmpruntDaoImpl implements EmpruntDao {
     }
 
     @Override
-    public int create(int idMembre, int idLivre, LocalDate dateEmprunt) throws DaoException {
+    public int create(Emprunt emprunt) throws DaoException {
         try {
             Connection conn = ConnectionManager.getConnection();
 
             PreparedStatement pstmnt = conn.prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS);
 
-            pstmnt.setInt(1, idMembre);
-            pstmnt.setInt(2, idLivre);
-            pstmnt.setString(3, dateEmprunt.toString());
+            pstmnt.setInt(1, emprunt.getMembre().getId());
+            pstmnt.setInt(2, emprunt.getLivre().getId());
+            pstmnt.setString(3, emprunt.getDateEmprunt().toString());
 
-            pstmnt.executeQuery();
+            pstmnt.executeUpdate();
             ResultSet rs = pstmnt.getGeneratedKeys();
 
             if (rs.next()) {
                 int id = rs.getInt(1);
                 System.out.println("Emprunt créé avec succès");
+                conn.close();
                 return id;
             }
 
@@ -210,14 +243,15 @@ public class EmpruntDaoImpl implements EmpruntDao {
 
             PreparedStatement pstmnt = conn.prepareStatement(updateQuery);
 
-            pstmnt.setInt(1, emprunt.getIdMembre());
-            pstmnt.setInt(2, emprunt.getIdLivre());
+            pstmnt.setInt(1, emprunt.getMembre().getId());
+            pstmnt.setInt(2, emprunt.getLivre().getId());
             pstmnt.setString(3, emprunt.getDateEmprunt().toString());
             pstmnt.setString(4, emprunt.getDateRetour().toString());
             pstmnt.setInt(5, emprunt.getId());
 
             pstmnt.executeUpdate();
             System.out.println("Emprunt mis à jour avec succès");
+            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -235,7 +269,10 @@ public class EmpruntDaoImpl implements EmpruntDao {
             ResultSet rs = stmnt.executeQuery(countQuery);
 
             if (rs.next()) {
-                return rs.getInt("count");
+                int count = rs.getInt("count");
+                conn.close();
+                return count;
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

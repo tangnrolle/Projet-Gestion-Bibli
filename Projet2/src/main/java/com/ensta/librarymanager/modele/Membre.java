@@ -78,7 +78,9 @@ public class Membre {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+        String desc = new String();
+        desc += "(" + id + "," + nom.toUpperCase() + "," + prenom + "," + email + "," + adresse + "," + telephone + ","
+                + abonnement + ")\n";
+        return desc;
     }
 }
