@@ -77,13 +77,14 @@
                   </tr>
                 </thead>
                 <tbody id="results">
-                  <c:forEach items="${listEmprunt}" var="emprunt">
+                  <c:forEach items="${listEmpruntEnCours}" var="emprunt">
                     <tr>
                       <td>${emprunt.getLivre().getTitre()}, <em>${emprunt.getLivre().getAuteur()}</em></td>
                       <td>${emprunt.getMembre().getPrenom()} ${emprunt.getMembre().getNom()}</td>
                       <td>${emprunt.getDateEmprunt()}</td>
                       <td>
-                        <a href="emprunt_return?id=idDeLEmprunt">
+                        <a href="emprunt_return?id=${emprunt.getId()}">
+                          retourner
                           <ion-icon class="table-item" name="log-in">
                         </a>
                       </td>

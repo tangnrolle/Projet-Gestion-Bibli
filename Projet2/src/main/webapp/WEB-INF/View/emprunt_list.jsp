@@ -47,7 +47,7 @@
                             ${emprunt.getDateRetour()}
                           </c:when>
                           <c:otherwise>
-                            <a href="emprunt_return?idDeLEmprunt">
+                            <a href="emprunt_return?id=${emprunt.getId()}">
                               retourner
                               <ion-icon class="table-item" name="log-in">
                             </a>

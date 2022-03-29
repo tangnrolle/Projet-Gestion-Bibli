@@ -1,6 +1,7 @@
 package com.ensta.servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ensta.librarymanager.exception.ServiceException;
+import com.ensta.librarymanager.modele.Emprunt;
 import com.ensta.librarymanager.service.EmpruntServiceImpl;
 import com.ensta.librarymanager.service.LivreServiceImpl;
 import com.ensta.librarymanager.service.MembreServiceImpl;
@@ -36,7 +38,19 @@ public class EmpruntAddServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.doGet(request, response);
-        ;
+        try {
+            int idLivre = Integer.valueOf(request.getParameter("idLivre"));
+            int idMembre = Integer.valueOf(request.getParameter("idMembre"));
+
+            Emprunt newEmprunt = new Emprunt(empruntServiceImpl.count() + 1, membreServiceImpl.getById(idMembre),
+                    livreServiceImpl.getById(idLivre), LocalDate.now(), null);
+            empruntServiceImpl.create(newEmprunt);
+
+            response.sendRedirect("dashboard");
+
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            throw new ServletException("Erreur au niveau du servlet - EmpruntAddServlet.doPost");
+        }
     }
 }

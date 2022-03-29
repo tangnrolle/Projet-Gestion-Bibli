@@ -1,10 +1,12 @@
 package com.ensta.librarymanager.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -218,9 +220,12 @@ public class EmpruntDaoImpl implements EmpruntDao {
 
             PreparedStatement pstmnt = conn.prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS);
 
+            Date dateRetour = emprunt.getDateRetour() == null ? null : Date.valueOf(emprunt.getDateRetour());
+
             pstmnt.setInt(1, emprunt.getMembre().getId());
             pstmnt.setInt(2, emprunt.getLivre().getId());
-            pstmnt.setString(3, emprunt.getDateEmprunt().toString());
+            pstmnt.setDate(3, Date.valueOf(emprunt.getDateEmprunt()));
+            pstmnt.setDate(4, dateRetour);
 
             pstmnt.executeUpdate();
             ResultSet rs = pstmnt.getGeneratedKeys();

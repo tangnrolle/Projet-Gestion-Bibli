@@ -24,15 +24,15 @@
         </div>
         <div class="row">
           <div class="container">
-            <h5>Selectionnez le livre et le membre emprunteur</h5>
+            <h5>S&eacute;lectionnez le livre et le membre emprunteur</h5>
             <div class="row">
-              <form action="/LibraryManager/emprunt_add" method="post" class="col s12">
+              <form action="/TP3Ensta/emprunt_add" method="post" class="col s12">
                 <div class="row">
                   <div class="input-field col s6">
                     <select id="idLivre" name="idLivre" class="browser-default">
                       <option value="" disabled selected>-- Livres --</option>
                       <c:forEach items="${listLivreDispo}" var="livre">
-                        <option value="idLivre">"${livre.getTitre()}", de ${livre.getAuteur()}</option>
+                        <option value="${livre.getId()}">"${livre.getTitre()}", de ${livre.getAuteur()}</option>
                       </c:forEach>
                       <!-- TODO : parcourir la liste des livres disponibles et afficher autant d'options que n�cessaire, sur la base de l'exemple ci-dessous -->
                     </select>
@@ -41,7 +41,7 @@
                     <select id="idMembre" name="idMembre" class="browser-default">
                       <option value="" disabled selected>-- Membres --</option>
                       <c:forEach items="${listMembreEmpruntPossible}" var="membre">
-                        <option value="idMembre">${membre.getPrenom()} ${membre.getNom()}</option>
+                        <option value="${membre.getId()}">${membre.getPrenom()} ${membre.getNom()}</option>
                       </c:forEach>
                     </select>
                   </div>

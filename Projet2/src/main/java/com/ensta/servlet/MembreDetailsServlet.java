@@ -9,35 +9,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ensta.librarymanager.exception.ServiceException;
-import com.ensta.librarymanager.service.EmpruntServiceImpl;
+import com.ensta.librarymanager.service.MembreServiceImpl;
 
-@WebServlet("/emprunt_list")
-public class EmpruntListServlet extends HttpServlet {
-    EmpruntServiceImpl empruntServiceImpl = EmpruntServiceImpl.getInstance();
+@WebServlet("/membre_details")
+public class MembreDetailsServlet extends HttpServlet {
+    MembreServiceImpl membreServiceImpl = MembreServiceImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String show = request.getParameter("show");
-
-            if (show == null) {
-                request.setAttribute("listEmprunt", this.empruntServiceImpl.getListCurrent());
-            } else if (show.equals("all")) {
-                request.setAttribute("listEmprunt", this.empruntServiceImpl.getList());
-            }
+            request.setAttribute("listMembre", this.membreServiceImpl.getList());
 
         } catch (ServiceException e) {
             e.printStackTrace();
-            throw new ServletException("Erreur au niveau du servlet - EmpruntListServlet.doGet");
+            throw new ServletException("Erreur au niveau du servlet - MembreListServlet.doGet");
         }
-        this.getServletContext().getRequestDispatcher("/WEB-INF/View/emprunt_list.jsp").forward(request, response);
-
+        this.getServletContext().getRequestDispatcher("/WEB-INF/View/membre_details.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         this.doGet(request, response);
+        ;
     }
 }

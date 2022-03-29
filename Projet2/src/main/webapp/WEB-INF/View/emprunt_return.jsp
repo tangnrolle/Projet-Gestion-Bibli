@@ -26,18 +26,32 @@
           <div class="container">
             <h5>S&eacute;lectionnez le livre &agrave; retourner</h5>
             <div class="row">
-              <form action="/LibraryManager/emprunt_return" method="post" class="col s12">
+              <form action="/TP3Ensta/emprunt_return" method="post" class="col s12">
                 <div class="row">
                   <div class="input-field col s12">
                     <select id="id" name="id" class="browser-default">
-                      <option value="" disabled selected>---</option>
+                      <option value="">---</option>
                       <c:forEach items="${listEmpruntNonRendus}" var="emprunt">
-                        <option value="idDeLEmprunt">"${emprunt.getLivre().getTitre()}", emprunt&eacute; par
-                          ${emprunt.getMembre().getPrenom()} ${emprunt.getMembre().getNom()}
-                        </option>
+                        <c:choose>
+                          <c:when test="${emprunt.getId() == idSelectedEmprunt}">
+                            <option value="${emprunt.getId()}" selected>
+                              "${emprunt.getLivre().getTitre()}",
+                              emprunt&eacute; par
+                              ${emprunt.getMembre().getPrenom()} ${emprunt.getMembre().getNom()}
+                            </option>
+                          </c:when>
+                          <c:otherwise>
+                            False
+                            <option value="${emprunt.getId()}">
+                              "${emprunt.getLivre().getTitre()}",
+                              emprunt&eacute; par
+                              ${emprunt.getMembre().getPrenom()} ${emprunt.getMembre().getNom()}
+                            </option>
+                          </c:otherwise>
+                        </c:choose>
                       </c:forEach>
                       <!-- TODO : parcourir la liste des emprunts non rendus et afficher autant d'options que n�cessaire, sur la base de l'exemple ci-dessous -->
-                      <!-- TODO : si l'attribut id existe, l'option correspondante devra �tre s�lectionn�e par d�faut (ajouter l'attribut selected dans la balise <option>) -->
+                      <!-- TODO : si l'attribut idEmprunt existe, l'option correspondante devra �tre s�lectionn�e par d�faut (ajouter l'attribut selected dans la balise <option>) -->
                     </select>
                   </div>
                 </div>
