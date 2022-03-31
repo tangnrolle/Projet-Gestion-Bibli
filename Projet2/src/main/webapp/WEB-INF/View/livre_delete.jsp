@@ -24,19 +24,20 @@
         </div>
         <div class="row">
           <div class="container">
-            <h5>Suppression du livre n&ring;42</h5> <!-- TODO : afficher l'id du livre au lieu de 42 -->
+            <h5>Suppression du livre n&ring; ${idDuLivre}</h5> <!-- TODO : afficher l'id du livre au lieu de 42 -->
             <div class="row">
-              <p>&ecirc;tes-vous s&ucirc;r de vouloir supprimer le livre TitreDuLivre de NomDeLAuteur (code isbnDuLivre)
+              <p>&ecirc;tes-vous s&ucirc;r de vouloir supprimer le livre ${titre} de ${auteur} (code ${isbn})
                 ?</p>
               <!-- TODO : compl�ter les trois informations ci-contre -->
-              <form action="/LibraryManager/livre_delete" method="post" class="col s12">
-                <input type="hidden" value="idDuLivre" name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+              <form action="/TP3Ensta/livre_delete" method="post" class="col s12">
+                <input type="hidden" value="${idDuLivre}" name="id">
+                <!-- TODO : remplacer idDuLivre par l'id du livre -->
                 <div class="row center">
                   <button class="btn waves-effect waves-light red" type="submit">Supprimer
                     <i class="material-icons right">delete</i>
                   </button>
                   <a class="btn waves-effect waves-light orange"
-                    href="/LibraryManager/livre_details?id=idDuLivre">Annuler</a>
+                    href="/TP3Ensta/livre_details?id=${idDuLivre}">Annuler</a>
                   <!-- TODO : remplacer idDuLivre par l'id du livre -->
                 </div>
               </form>

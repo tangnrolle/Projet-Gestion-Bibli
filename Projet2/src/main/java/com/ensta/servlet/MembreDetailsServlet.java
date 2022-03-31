@@ -23,7 +23,7 @@ public class MembreDetailsServlet extends HttpServlet {
 
         } catch (ServiceException e) {
             e.printStackTrace();
-            throw new ServletException("Erreur au niveau du servlet - MembreListServlet.doGet");
+            throw new ServletException("Erreur au niveau du servlet - MembreDetailsServlet.doGet");
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/View/membre_details.jsp").forward(request, response);
     }

@@ -20,6 +20,16 @@ public class Membre {
         this.setAbonnement(abonnement);
     }
 
+    public Membre(String nom, String prenom, String email, String adresse, String telephone,
+            Abonnement abonnement) {
+        this.setNom(nom);
+        this.setPrenom(prenom);
+        this.setEmail(email);
+        this.setAdresse(adresse);
+        this.setTelephone(telephone);
+        this.setAbonnement(abonnement);
+    }
+
     public Abonnement getAbonnement() {
         return abonnement;
     }

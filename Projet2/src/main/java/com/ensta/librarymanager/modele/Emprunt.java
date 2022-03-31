@@ -18,6 +18,13 @@ public class Emprunt {
         this.setDateRetour(dateRetour);
     }
 
+    public Emprunt(Membre membre, Livre livre, LocalDate dateEmprunt, LocalDate dateRetour) {
+        this.setMembre(membre);
+        this.setLivre(livre);
+        this.setDateEmprunt(dateEmprunt);
+        this.setDateRetour(dateRetour);
+    }
+
     public LocalDate getDateRetour() {
         return dateRetour;
     }

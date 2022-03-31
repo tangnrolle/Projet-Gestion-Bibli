@@ -19,21 +19,19 @@ public class ModeleTest {
         EmpruntDaoImpl E1 = EmpruntDaoImpl.getInstance();
 
         try {
-            Livre Lv1 = new Livre(15, "Le Petit Prince", "St Ex", "0875689");
+            Livre Lv1 = new Livre("Le Petit Prince", "St Ex", "0875689");
             Membre Mb1 = new Membre(12, "Martin", "Jacques", " 12 rue Jacques Martin", "jmartin@gmail.com",
                     "0224363821",
                     Abonnement.BASIC);
 
-            L1.create(Lv1);
+            // int id = L1.create(Lv1);
+            // System.out.println("Id du nouv livre : " + id);
             System.out.println(L1.getList());
-            L1.delete(14);
             System.out.println(L1.getList());
             System.out.println(L1.count());
 
-            M1.create(Mb1);
-            M1.delete(14);
+            // M1.create(Mb1);
             System.out.println(M1.getList());
-            M1.delete(12);
             System.out.println(M1.getList());
             System.out.println(M1.count());
 

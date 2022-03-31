@@ -106,10 +106,10 @@ public class LivreDaoImpl implements LivreDao {
             ResultSet rs = pstmnt.getGeneratedKeys();
 
             if (rs.next()) {
-                int id = rs.getInt(1);
+                int idLivre = rs.getInt(1);
                 System.out.println("Livre créé avec succès");
                 conn.close();
-                return id;
+                return idLivre;
             }
 
         } catch (SQLException e) {

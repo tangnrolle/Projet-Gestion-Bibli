@@ -58,9 +58,9 @@ public class LivreServiceImpl implements LivreService {
         try {
             LivreDaoImpl livreDaoImpl = LivreDaoImpl.getInstance();
 
-            if (id < 0 || id > livreDaoImpl.count()) {
+            if (id < 0) {
                 System.out.println("Cet identifiant ne correspond à aucun livre");
-                return null;
+                throw new ServiceException("Erreur au niveau du service - LivreServiceImpl.getById");
             }
 
             else {
@@ -81,8 +81,7 @@ public class LivreServiceImpl implements LivreService {
             if (livre.getTitre() == null || livre.getTitre().equals("")) {
                 throw new ServiceException("Le titre d'un livre ne peut pas être vide");
             } else {
-                livreDaoImpl.create(livre);
-                return 1;
+                return livreDaoImpl.create(livre);
             }
 
         } catch (DaoException e) {
@@ -98,7 +97,7 @@ public class LivreServiceImpl implements LivreService {
             if (livre.getTitre() == null || livre.getTitre().equals("")) {
                 System.out.println("Le titre d'un livre ne peut pas être vide");
             } else {
-                livreDaoImpl.create(livre);
+                livreDaoImpl.update(livre);
             }
         } catch (DaoException e) {
             e.printStackTrace();

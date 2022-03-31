@@ -13,6 +13,12 @@ public class Livre {
         this.isbn = isbn;
     }
 
+    public Livre(String titre, String auteur, String isbn) {
+        this.titre = titre;
+        this.auteur = auteur;
+        this.isbn = isbn;
+    }
+
     public String getIsbn() {
         return isbn;
     }

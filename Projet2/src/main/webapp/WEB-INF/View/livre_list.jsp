@@ -39,7 +39,7 @@
                     <td>${livre.getTitre()}</td>
                     <td>${livre.getAuteur()}</td>
                     <td>${livre.getIsbn()}</td>
-                    <td class="center"><a href="livre_details?id=idDuLivre">
+                    <td class="center"><a href="livre_details?id=${livre.getId()}">
                         d&eacute;tails
                         <ion-icon class="details" name="information-circle-outline"></ion-icon>
                       </a></td>

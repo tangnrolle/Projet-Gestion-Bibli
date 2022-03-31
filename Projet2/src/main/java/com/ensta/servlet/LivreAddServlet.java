@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ensta.librarymanager.exception.ServiceException;
-import com.ensta.librarymanager.modele.Livre;
 import com.ensta.librarymanager.service.LivreServiceImpl;
+import com.ensta.librarymanager.modele.Livre;
 
 @WebServlet("/livre_add")
 public class LivreAddServlet extends HttpServlet {
@@ -30,11 +30,8 @@ public class LivreAddServlet extends HttpServlet {
             String auteur = request.getParameter("auteur");
             String isbn = request.getParameter("isbn");
 
-            Livre newLivre = new Livre(livreServiceImpl.count() + 1, titre, auteur, isbn);
-
-            livreServiceImpl.create(newLivre);
-
-            response.sendRedirect("livre_details&id=" + newLivre.getId());
+            int id = livreServiceImpl.create(new Livre(titre, auteur, isbn));
+            response.sendRedirect("livre_details?id=" + id);
 
         } catch (ServiceException e) {
             e.printStackTrace();

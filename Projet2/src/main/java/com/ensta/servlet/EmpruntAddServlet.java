@@ -42,7 +42,7 @@ public class EmpruntAddServlet extends HttpServlet {
             int idLivre = Integer.valueOf(request.getParameter("idLivre"));
             int idMembre = Integer.valueOf(request.getParameter("idMembre"));
 
-            Emprunt newEmprunt = new Emprunt(empruntServiceImpl.count() + 1, membreServiceImpl.getById(idMembre),
+            Emprunt newEmprunt = new Emprunt(membreServiceImpl.getById(idMembre),
                     livreServiceImpl.getById(idLivre), LocalDate.now(), null);
             empruntServiceImpl.create(newEmprunt);
 
