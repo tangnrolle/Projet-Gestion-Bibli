@@ -44,8 +44,7 @@
                     <td class="hide-on-small-only">${membre.getEmail()}</td>
                     <td class="hide-on-small-only">${membre.getTelephone()}</td>
                     <td class="center"><a href="membre_details?id=${membre.getId()}">
-                        d&eacute;tails
-                        <ion-icon class="details" name="information-circle-outline"></ion-icon>
+                        <ion-icon class="details" name="information-circle"></ion-icon>
                       </a></td>
                   </tr>
                 </c:forEach>
@@ -57,6 +56,8 @@
       </section>
     </main>
     <jsp:include page='footer.jsp'></jsp:include>
+     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </body>
 
   </html>

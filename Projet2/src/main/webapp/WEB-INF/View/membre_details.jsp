@@ -106,7 +106,8 @@
 												</td>
 												<td>${emprunt.getDateEmprunt()}</td>
 												<td>
-													<a href="emprunt_return?id=${emprunt.getId()}">retourner
+													<a href="emprunt_return?id=${emprunt.getId()}">
+													<ion-icon class="table-item" name="log-in">
 													</a>
 												</td>
 											</tr>

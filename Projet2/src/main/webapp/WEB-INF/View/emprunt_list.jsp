@@ -48,7 +48,6 @@
                           </c:when>
                           <c:otherwise>
                             <a href="emprunt_return?id=${emprunt.getId()}">
-                              retourner
                               <ion-icon class="table-item" name="log-in">
                             </a>
                           </c:otherwise>
@@ -65,6 +64,8 @@
       </section>
     </main>
     <jsp:include page='footer.jsp'></jsp:include>
+     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </body>
 
   </html>

@@ -14,4 +14,6 @@
     <li><a href="emprunt_return"><ion-icon class="menu-item pink-item" name="log-in"></ion-icon>Retourner un livre</a></li>
     <li><a href="emprunt_list"><i class="material-icons pink-item">swap_horiz</i>Emprunts en cours</a></li>
     <li><a href="emprunt_list?show=all"><i class="material-icons pink-item">swap_horizontal_circle</i>Tous les emprunts</a></li>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </ul>
