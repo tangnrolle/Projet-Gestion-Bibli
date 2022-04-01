@@ -27,7 +27,7 @@ public class LivreDeleteServlet extends HttpServlet {
 
         } catch (ServiceException e) {
             e.printStackTrace();
-            throw new ServletException("Erreur au niveau du servlet - LivreDeleteServlet.doPost");
+            throw new ServletException("Erreur au niveau du servlet - LivreDeleteServlet.doGet");
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/View/livre_delete.jsp").forward(request, response);
     }

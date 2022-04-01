@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.ensta.librarymanager.dao.EmpruntDaoImpl;
-import com.ensta.librarymanager.dao.LivreDaoImpl;
-import com.ensta.librarymanager.dao.MembreDaoImpl;
 import com.ensta.librarymanager.exception.DaoException;
 import com.ensta.librarymanager.exception.ServiceException;
 import com.ensta.librarymanager.modele.Emprunt;
@@ -54,11 +52,10 @@ public class EmpruntServiceImpl implements EmpruntService {
     public List<Emprunt> getListCurrentByMembre(int idMembre) throws ServiceException {
         try {
             EmpruntDaoImpl empruntDaoImpl = EmpruntDaoImpl.getInstance();
-            MembreDaoImpl membreDaoImpl = MembreDaoImpl.getInstance();
 
-            if (idMembre < 0 || idMembre > membreDaoImpl.count()) {
+            if (idMembre < 0) {
                 System.out.println("Cet identifiant ne correspond à aucun membre");
-                return null;
+                throw new ServiceException("Erreur au niveau du service - EmpruntServiceImpl.getListCurrentByMembre");
             }
 
             else {
@@ -76,11 +73,10 @@ public class EmpruntServiceImpl implements EmpruntService {
     public List<Emprunt> getListCurrentByLivre(int idLivre) throws ServiceException {
         try {
             EmpruntDaoImpl empruntDaoImpl = EmpruntDaoImpl.getInstance();
-            LivreDaoImpl livreDaoImpl = LivreDaoImpl.getInstance();
 
-            if (idLivre < 0 || idLivre > livreDaoImpl.count()) {
+            if (idLivre < 0) {
                 System.out.println("Cet identifiant ne correspond à aucun livre");
-                return null;
+                throw new ServiceException("Erreur au niveau du service - EmpruntServiceImpl.getListCurrentByLivre");
             }
 
             else {
@@ -99,9 +95,9 @@ public class EmpruntServiceImpl implements EmpruntService {
         try {
             EmpruntDaoImpl empruntDaoImpl = EmpruntDaoImpl.getInstance();
 
-            if (id < 0 || id > empruntDaoImpl.count()) {
+            if (id < 0) {
                 System.out.println("Cet identifiant ne correspond à aucun emprunt");
-                return null;
+                throw new ServiceException("Erreur au niveau du service - EmpruntServiceImpl.getListCurrentByLivre");
             }
 
             else {

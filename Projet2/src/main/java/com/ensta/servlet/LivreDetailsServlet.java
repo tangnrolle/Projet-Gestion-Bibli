@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ensta.librarymanager.exception.ServiceException;
 import com.ensta.librarymanager.modele.Livre;
+import com.ensta.librarymanager.service.EmpruntServiceImpl;
 import com.ensta.librarymanager.service.LivreServiceImpl;
 
 @WebServlet("/livre_details")
 public class LivreDetailsServlet extends HttpServlet {
     LivreServiceImpl livreServiceImpl = LivreServiceImpl.getInstance();
+    EmpruntServiceImpl empruntServiceImpl = EmpruntServiceImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,6 +28,7 @@ public class LivreDetailsServlet extends HttpServlet {
             request.setAttribute("titreDuLivre", livreServiceImpl.getById(id).getTitre());
             request.setAttribute("auteurDuLivre", livreServiceImpl.getById(id).getAuteur());
             request.setAttribute("isbnDuLivre", livreServiceImpl.getById(id).getIsbn());
+            request.setAttribute("listEmpruntEnCours", empruntServiceImpl.getListCurrentByLivre(id));
 
         } catch (ServiceException e) {
             e.printStackTrace();
@@ -55,7 +58,7 @@ public class LivreDetailsServlet extends HttpServlet {
 
         } catch (ServiceException e) {
             e.printStackTrace();
-            throw new ServletException("Erreur au niveau du servlet - LivreAddServlet.doPost");
+            throw new ServletException("Erreur au niveau du servlet - LivreDetailsServlet.doPost");
         }
     }
 }

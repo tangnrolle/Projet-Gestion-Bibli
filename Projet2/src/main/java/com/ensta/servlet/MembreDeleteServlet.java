@@ -19,11 +19,14 @@ public class MembreDeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            request.setAttribute("listMembre", this.membreServiceImpl.getList());
+            int idDuMembre = Integer.valueOf(request.getParameter("id"));
+            request.setAttribute("idDuMembre", idDuMembre);
+            request.setAttribute("prenomDuMembre", membreServiceImpl.getById(idDuMembre).getPrenom());
+            request.setAttribute("nomDuMembre", membreServiceImpl.getById(idDuMembre).getNom());
 
         } catch (ServiceException e) {
             e.printStackTrace();
-            throw new ServletException("Erreur au niveau du servlet - MembreListServlet.doGet");
+            throw new ServletException("Erreur au niveau du servlet - MembreDeleteServlet.doGet");
         }
         this.getServletContext().getRequestDispatcher("/WEB-INF/View/membre_delete.jsp").forward(request, response);
     }
@@ -31,7 +34,16 @@ public class MembreDeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.doGet(request, response);
-        ;
+        try {
+            int idDuMembre = Integer.valueOf(request.getParameter("id"));
+
+            membreServiceImpl.delete(idDuMembre);
+
+            response.sendRedirect("membre_list");
+
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            throw new ServletException("Erreur au niveau du servlet - MembreDeleteServlet.doPost");
+        }
     }
 }

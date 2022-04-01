@@ -43,7 +43,7 @@
                     <td class="hide-on-small-only">${membre.getAdresse()}</td>
                     <td class="hide-on-small-only">${membre.getEmail()}</td>
                     <td class="hide-on-small-only">${membre.getTelephone()}</td>
-                    <td class="center"><a href="membre_details?id=idDuMembre">
+                    <td class="center"><a href="membre_details?id=${membre.getId()}">
                         d&eacute;tails
                         <ion-icon class="details" name="information-circle-outline"></ion-icon>
                       </a></td>

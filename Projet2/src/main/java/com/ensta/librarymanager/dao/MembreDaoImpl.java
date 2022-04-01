@@ -101,7 +101,7 @@ public class MembreDaoImpl implements MembreDao {
 
             PreparedStatement pstmnt = conn.prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS);
 
-            pstmnt.setString(1, membre.getNom());
+            pstmnt.setString(1, membre.getNom().toUpperCase());
             pstmnt.setString(2, membre.getPrenom());
             pstmnt.setString(3, membre.getAdresse());
             pstmnt.setString(4, membre.getEmail());

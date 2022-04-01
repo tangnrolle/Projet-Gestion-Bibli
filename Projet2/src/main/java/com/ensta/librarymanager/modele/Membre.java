@@ -4,23 +4,23 @@ public class Membre {
     private int id; // PRIMARY KEY
     private String nom;
     private String prenom;
-    private String email;
     private String adresse;
+    private String email;
     private String telephone;
     private Abonnement abonnement;
 
-    public Membre(int id, String nom, String prenom, String email, String adresse, String telephone,
+    public Membre(int id, String nom, String prenom, String adresse, String email, String telephone,
             Abonnement abonnement) {
         this.setId(id);
         this.setNom(nom);
         this.setPrenom(prenom);
-        this.setEmail(email);
         this.setAdresse(adresse);
+        this.setEmail(email);
         this.setTelephone(telephone);
         this.setAbonnement(abonnement);
     }
 
-    public Membre(String nom, String prenom, String email, String adresse, String telephone,
+    public Membre(String nom, String prenom, String adresse, String email, String telephone,
             Abonnement abonnement) {
         this.setNom(nom);
         this.setPrenom(prenom);

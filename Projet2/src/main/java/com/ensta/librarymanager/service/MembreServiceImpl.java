@@ -58,9 +58,9 @@ public class MembreServiceImpl implements MembreService {
         try {
             MembreDaoImpl membreDaoImpl = MembreDaoImpl.getInstance();
 
-            if (id < 0 || id > membreDaoImpl.count()) {
+            if (id < 0) {
                 System.out.println("Cet identifiant ne correspond à aucun membre");
-                return null;
+                throw new ServiceException("Erreur au niveau du service - MembreServiceImpl.getById");
             }
 
             else {
@@ -83,8 +83,8 @@ public class MembreServiceImpl implements MembreService {
                     || membre.getPrenom().equals("")) {
                 throw new ServiceException("Le nom ou le prenom d'un membre ne peuvent pas être vides");
             } else {
-                membreDaoImpl.create(membre);
-                return 1;
+                return membreDaoImpl.create(membre);
+
             }
 
         } catch (DaoException e) {

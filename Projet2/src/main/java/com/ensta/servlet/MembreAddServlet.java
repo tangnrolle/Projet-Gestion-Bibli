@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ensta.librarymanager.exception.ServiceException;
-import com.ensta.librarymanager.service.LivreServiceImpl;
 import com.ensta.librarymanager.service.MembreServiceImpl;
 import com.ensta.librarymanager.modele.Abonnement;
-import com.ensta.librarymanager.modele.Livre;
 import com.ensta.librarymanager.modele.Membre;
 
 @WebServlet("/membre_add")
